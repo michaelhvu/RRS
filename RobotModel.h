@@ -12,5 +12,5 @@ class RobotModel {
 
 
 	public:
-		
+		string getName();
 };
