@@ -7,7 +7,7 @@ int main() {
 
 //	Testing the class
 
-	RobotPart robotHead("Doug", 123553, 123.52, 1234.21, "Dougs head");
+	RobotHead robotHead("Doug", 123553, 123.52, 1234.21, "Dougs head");
 	cout << robotHead.getName() << endl;
 
 }

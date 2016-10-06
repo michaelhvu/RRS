@@ -1,3 +1,4 @@
+#include <string>
 #ifndef __ROBOT_PART
 #define __ROBOT_PART 2016
 
