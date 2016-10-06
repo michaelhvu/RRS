@@ -8,7 +8,7 @@ debug: executable
 rebuild: clean executable
 executable: controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o
 	$(CXX) $(CXXFLAGS) controller.o robot_model.o robot_part.o robot_head.o
-controller.o: controller.cpp robot_head.h robot_part.h
+controller.o: controller.cpp robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h 
 	$(CXX) $(CXXFLAGS) -w -c controller.cpp
 robot_model.o: robot_model.cpp 
 	$(CXX) $(CXXFLAGS) -w -c robot_model.cpp
