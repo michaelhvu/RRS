@@ -1,4 +1,6 @@
+#include <string>
 #include "robot_part.h";
+
 
 string RobotPart::getName() {
 	return this_name;

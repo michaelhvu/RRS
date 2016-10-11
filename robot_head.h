@@ -1,6 +1,8 @@
-#include <iostream>
+#ifndef __ROBOT_HEAD
+#define __ROBOT_HEAD 2016
 #include <string>
 #include "robot_part.h"
+
 
 using namespace std;
 using std::string;
@@ -12,3 +14,4 @@ class RobotHead : public RobotPart {
 
 };
 
+#endif

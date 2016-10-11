@@ -18,7 +18,7 @@ robot_head.o: robot_head.cpp robot_part.h
 	$(CXX) $(CXXFLAGS) -w -c robot_head.cpp
 robot_locomotor.o: robot_locomotor.cpp robot_part.h
 	$(CXX) $(CXXFLAGS) -w -c robot_locomotor.cpp
-robot_torso.o: robot_torso.cpp robot_part.h
+robot_torso.o: robot_torso.cpp robot_part.h robot_head.h robot_locomotor.h robot_torso.h robot_arm.h robot_battery.h
 	$(CXX) $(CXXFLAGS) -w -c robot_torso.cpp
 robot_arm.o: robot_arm.cpp robot_part.h
 	$(CXX) $(CXXFLAGS) -w -c robot_arm.cpp

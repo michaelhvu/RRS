@@ -13,7 +13,7 @@ void testArm() {
 }
 
 void testBattery() {
-	RobotBattery robotBattery("Battery created", 5, 300, 999.99, "make robot battery");
+	RobotBattery robotBattery("Battery created", 5, 300, 999.99, "make robot battery", 423, 123);
 	cout << robotBattery.getName() << endl;
 
 }
@@ -24,7 +24,7 @@ void testHead() {
 }
 
 void testLocomotor() {
-	RobotLocomotor robotLocomotor("Locomotor created", 2, 200.50, 2000, "make robot locomotor");
+	RobotLocomotor robotLocomotor("Locomotor created", 2, 200.50, 2000, "make robot locomotor", 1234);
 	cout << robotLocomotor.getName() << endl;
 }
 
