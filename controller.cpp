@@ -37,9 +37,10 @@ void testPart() {
 }*/
 
 void testTorso() {
-	RobotTorso robotTorso("Torso created", 3, 350, 4300, "make robot torso");
+	RobotTorso robotTorso("Doug Torso created ", 3, 350, 4300, "make robot torso");
 	cout << robotTorso.getName() << endl;
 }
+
 
 int main() {
 
