@@ -24,6 +24,12 @@ class RobotTorso : public RobotPart {
         vector<RobotBattery> this_robot_battery;
         RobotLocomotor *this_robot_locomotor;
 
+        RobotTorso(string name, int partNum, double weight, double cost, string description, int compartments)
+            : RobotPart(name, partNum, weight, cost, description), batteryCompartments(compartments) { }
+
+
+        int getCompartments() {return batteryCompartments;}
+
 /*
 
         void connectArm(RobotArm arm);
@@ -59,8 +65,6 @@ class RobotTorso : public RobotPart {
 
         }
 
-        RobotTorso(string name, int partNum, double weight, double cost, string description)
-            : RobotPart(name, partNum, weight, cost, description) { }
 
 
 
