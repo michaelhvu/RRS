@@ -1,6 +1,4 @@
 #include <iostream>
-#include <vector>
-#include <string>
 #include "robot_head.h"
 #include "robot_part.h"
 #include "robot_locomotor.h"
@@ -8,49 +6,6 @@
 #include "robot_battery.h"
 #include "robot_arm.h"
 
-using namespace std;
-using std::string;
-
-/*
-
-void testArm() {
-	RobotArm robotArm("Arm created", 4, 150.50, 750.50, "make robot arm");
-	cout << robotArm.getName() << endl;
-
-}
-
-void testBattery() {
-	RobotBattery robotBattery("Battery created", 5, 300, 999.99, "make robot battery", 423, 123);
-	cout << robotBattery.getName() << endl;
-
-}
-
-void testHead() {
-	RobotHead robotHead("Head created", 1, 120, 1234.21, "make robot head");
-	cout << robotHead.getName() << endl;
-}
-
-void testLocomotor() {
-	RobotLocomotor robotLocomotor("Locomotor created", 2, 200.50, 2000, "make robot locomotor", 1234);
-	cout << robotLocomotor.getName() << endl;
-}
-
-void testModel() {
-
-}
-
-void testPart() {
-
-}
-
-void testTorso() {
-	RobotTorso robotTorso("Doug Torso created ", 3, 350, 4300, "make robot torso");
-	cout << robotTorso.getName() << endl;
-
-
-}
-
-<<<<<<< HEAD
 void createMenu() {
 	int choice;
 	bool flag = true;
@@ -148,11 +103,6 @@ void createReport() {
 		}
 	} while (flag != false);
 }
-=======
-*/
-
-
->>>>>>> 89516144df2998b579b022819490a72ef9f3993a
 
 int main() {
 
@@ -192,36 +142,3 @@ int main() {
 	}
 	return 0;
 }
-
-
-
-
-
-/*
-//	Testing the class
-//      
-/*              RobotPart(name, partNum, weight, cost, description)
-    int menu=1;
-	while (menu!=0) {
-		cout << "Main Menu" << endl << "---------" << endl;
-	}
-
-	while (menu!=0) {
-		cout << "Test which one?\n1) Arm\n2) Battery\n3) Head\n4) Locomotor\n5) Model\n6) Part\n7) Torso\n0) Exit\n";
-    	cin >> menu;
-    	if (menu==1) testArm();
-    	else if (menu==2) testBattery();
-    	else if (menu==3) testHead();
-    	else if (menu==4) testLocomotor();
-    	//else if (menu==5) testModel();
-    	//else if (menu==6) testPart();
-    	else if (menu==7) testTorso();
-	}
-<<<<<<< HEAD
-	*/
-=======
-
-	*/
-
-}
->>>>>>> 89516144df2998b579b022819490a72ef9f3993a
