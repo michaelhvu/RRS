@@ -1,10 +1,15 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include "robot_head.h"
 #include "robot_part.h"
 #include "robot_locomotor.h"
 #include "robot_torso.h"
 #include "robot_battery.h"
 #include "robot_arm.h"
+
+using namespace std;
+using std::string;
 
 void testArm() {
 	RobotArm robotArm("Arm created", 4, 150.50, 750.50, "make robot arm");
@@ -39,6 +44,10 @@ void testPart() {
 void testTorso() {
 	RobotTorso robotTorso("Doug Torso created ", 3, 350, 4300, "make robot torso");
 	cout << robotTorso.getName() << endl;
+
+	robotTorso.addArm("Doug's left arm", 14, 2345, 2342, "doug's arm");
+	cout << robotTorso.this_robot_arm[0].getName() << endl;
+
 }
 
 

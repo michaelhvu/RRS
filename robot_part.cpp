@@ -1,4 +1,3 @@
-#include <string>
 #include "robot_part.h";
 
 
