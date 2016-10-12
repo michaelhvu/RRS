@@ -1,10 +1,17 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include "robot_head.h"
 #include "robot_part.h"
 #include "robot_locomotor.h"
 #include "robot_torso.h"
 #include "robot_battery.h"
 #include "robot_arm.h"
+
+using namespace std;
+using std::string;
+
+/*
 
 void testArm() {
 	RobotArm robotArm("Arm created", 4, 150.50, 750.50, "make robot arm");
@@ -13,7 +20,7 @@ void testArm() {
 }
 
 void testBattery() {
-	RobotBattery robotBattery("Battery created", 5, 300, 999.99, "make robot battery");
+	RobotBattery robotBattery("Battery created", 5, 300, 999.99, "make robot battery", 423, 123);
 	cout << robotBattery.getName() << endl;
 
 }
@@ -24,23 +31,26 @@ void testHead() {
 }
 
 void testLocomotor() {
-	RobotLocomotor robotLocomotor("Locomotor created", 2, 200.50, 2000, "make robot locomotor");
+	RobotLocomotor robotLocomotor("Locomotor created", 2, 200.50, 2000, "make robot locomotor", 1234);
 	cout << robotLocomotor.getName() << endl;
 }
 
-/*void testModel() {
+void testModel() {
 
 }
 
 void testPart() {
 
-}*/
-
-void testTorso() {
-	RobotTorso robotTorso("Torso created", 3, 350, 4300, "make robot torso");
-	cout << robotTorso.getName() << endl;
 }
 
+void testTorso() {
+	RobotTorso robotTorso("Doug Torso created ", 3, 350, 4300, "make robot torso");
+	cout << robotTorso.getName() << endl;
+
+
+}
+
+<<<<<<< HEAD
 void createMenu() {
 	int choice;
 	bool flag = true;
@@ -138,6 +148,11 @@ void createReport() {
 		}
 	} while (flag != false);
 }
+=======
+*/
+
+
+>>>>>>> 89516144df2998b579b022819490a72ef9f3993a
 
 int main() {
 
@@ -179,6 +194,10 @@ int main() {
 }
 
 
+
+
+
+/*
 //	Testing the class
 //      
 /*              RobotPart(name, partNum, weight, cost, description)
@@ -198,4 +217,11 @@ int main() {
     	//else if (menu==6) testPart();
     	else if (menu==7) testTorso();
 	}
+<<<<<<< HEAD
 	*/
+=======
+
+	*/
+
+}
+>>>>>>> 89516144df2998b579b022819490a72ef9f3993a
