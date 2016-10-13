@@ -3,7 +3,7 @@
 #include <vector>
 #include "robot_part.h"
 
-
+using namespace std;
 using std::string;
 
 class RobotModel {

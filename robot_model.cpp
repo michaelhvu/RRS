@@ -25,6 +25,6 @@ double RobotModel::maxSpeed() {
 }
 
 void RobotModel::addPart(RobotPart piece) {
-    this_robotParts.push_back(piece);
+    (*this_robotParts).push_back(piece);
     this_price=this_price+piece.getCost();
 }
