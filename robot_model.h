@@ -1,3 +1,6 @@
+#ifndef __ROBOT_MODEL
+#define __ROBOT_MODEL 2016
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -24,3 +27,5 @@ class RobotModel {
 		double maxSpeed();
 		void addPart(RobotPart);
 };
+
+#endif
