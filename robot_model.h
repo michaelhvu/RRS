@@ -13,17 +13,18 @@ class RobotModel {
 	private:
 		string this_name;
 		int this_modelNumber;
+		int this_numberOfPieces;
 		double this_price;
 		vector<RobotPart> *this_robotParts;
 
 
 	public:
 		RobotModel(string name, int modelNumber)
-			: this_name(name), this_modelNumber(modelNumber) {}
+			: this_name(name), this_modelNumber(modelNumber), this_numberOfPieces(0) {}
 		string getName();
 		int getModelNumber();
 		double getPrice();
-		//void componentCost();
+		double getComponentCost(RobotPart);
 		double maxSpeed();
 		void addPart(RobotPart);
 };
