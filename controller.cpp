@@ -38,11 +38,6 @@ int main() {
 	arms.push_back(RobotArm("Model A", 2201, 10, 20, "Useless arm"));
 	arms.push_back(RobotArm("Model Z", 2202, 10, 1000, "Can pick up any object"));
 
-	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
-	heads.push_back(RobotHead("Michael", 1101, 50, 510, "Michael's head"));
-	heads.push_back(RobotHead("Grant", 1102, 10, 50, "Grant's head"));
-	heads.push_back(RobotHead("Goku", 1103, 11, 75, "Head that looks like Goku"));
-	heads.push_back(RobotHead("Ang", 1104, 17, 120, "Head that looks like Ang"));
 
 	arms.push_back(RobotArm("Model X", 2200, 10, 50, "Can pick up cups"));
 	arms.push_back(RobotArm("Model A", 2201, 10, 20, "Useless arm"));
