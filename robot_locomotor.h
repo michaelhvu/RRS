@@ -12,7 +12,7 @@ class RobotLocomotor : public RobotPart {
 
     public:
         RobotLocomotor(string name, int partNum, double weight, double cost, string description, int maxSpeed)
-            : RobotPart(name, partNum, weight, cost, description), this_maxSpeed(maxSpeed) { }
+            : RobotPart(name, partNum, weight, cost, description, 3), this_maxSpeed(maxSpeed) { }
 
         int getMaxSpeed() {return this_maxSpeed;}
 

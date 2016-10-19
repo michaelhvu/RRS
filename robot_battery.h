@@ -13,7 +13,7 @@ class RobotBattery : public RobotPart {
 
     public:
         RobotBattery(string name, int partNum, double weight, double cost, string description, double energy, double maxPower)
-            : RobotPart(name, partNum, weight, cost, description), this_energy(energy), this_maxPower(maxPower) { }
+            : RobotPart(name, partNum, weight, cost, description, 4), this_energy(energy), this_maxPower(maxPower) { }
 
         double getEnergy() {return this_energy;}
         double getMaxPower() {return this_maxPower;}
