@@ -1,3 +1,6 @@
+#ifndef __ROBOT_TORSO
+#define __ROBOT_TORSO 2016
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -71,4 +74,6 @@ class RobotTorso : public RobotPart {
 
 
 };
+
+#endif
 

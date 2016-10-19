@@ -6,9 +6,9 @@ debug: CXXFLAGES += -g
 debug: executable
 
 rebuild: clean executable
-executable: controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o
-	$(CXX) $(CXXFLAGS) controller.o robot_model.o robot_part.o robot_head.o
-controller.o: controller.cpp robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h 
+executable: controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o view.o
+	$(CXX) $(CXXFLAGS) controller.o robot_model.o robot_part.o robot_head.o view.o
+controller.o: controller.cpp robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h view.h
 	$(CXX) $(CXXFLAGS) -w -c controller.cpp
 robot_model.o: robot_model.cpp robot_model.h
 	$(CXX) $(CXXFLAGS) -w -c robot_model.cpp
@@ -23,7 +23,9 @@ robot_torso.o: robot_torso.cpp robot_torso.h robot_part.h robot_head.h robot_loc
 robot_arm.o: robot_arm.cpp robot_arm.h robot_part.h
 	$(CXX) $(CXXFLAGS) -w -c robot_arm.cpp
 robot_battery.o: robot_battery.cpp robot_battery.h robot_part.h
-	$(CXX) $(CXXFLAGS) -w -c robot_battery.h
+	$(CXX) $(CXXFLAGS) -w -c robot_battery.cpp
+view.o: robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h
+	$(CXX) $(CXXFLAGS) -w -c view.cpp
 	
 
 
