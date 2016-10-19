@@ -10,7 +10,7 @@ using std::string;
 class RobotHead : public RobotPart {
     public:
         RobotHead(string name, int partNum, double weight, double cost, string description)
-            : RobotPart(name, partNum, weight, cost, description) { }
+            : RobotPart(name, partNum, weight, cost, description, 0) { }
 
 };
 
