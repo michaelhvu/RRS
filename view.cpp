@@ -161,7 +161,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 					cout << endl << "Battery" << endl << "-------" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tEnergy\tMax Power\tDescription" << endl;
 					cout << "-------------------------------------------" << endl;
-					for (i = 0; i < arm.size(); i++)
+					for (i = 0; i < battery.size(); i++)
 						cout << battery[i].getName() << "\t" << battery[i].getPartNumber() << "\t" << battery[i].getWeight() << "\t" << battery[i].getCost() << "\t" << battery[i].getEnergy() << "\t" << battery[i].getMaxPower() << "\t" << battery[i].getDescription() << endl;
 				}
 
@@ -198,7 +198,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 					cout << endl << "Torso" << endl << "-----" << endl;
 					cout << "Name\tPart #\tWeight\tCost\t\tBattery Compartments\tDescription" << endl;
 					cout << "-------------------------------------------" << endl;
-					for (i = 0; i < arm.size(); i++)
+					for (i = 0; i < torso.size(); i++)
 						cout << torso[i].getName() << "\t" << torso[i].getPartNumber() << "\t" << torso[i].getWeight() << "\t" << torso[i].getCost() << "\t" << torso[i].getCompartments() << "\t" << torso[i].getDescription() << endl;
 				}
 				cout<<"\nEnter The Part # Of The Torso You Desire: ";
@@ -234,7 +234,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 					cout << endl << "Locomotor" << endl << "---------" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tMax Speed\tDescription" << endl;
 					cout << "-------------------------------------------" << endl;
-					for (i = 0; i < arm.size(); i++)
+					for (i = 0; i < locomotor.size(); i++)
 						cout << locomotor[i].getName() << "\t" << locomotor[i].getPartNumber() << "\t" << locomotor[i].getWeight() << "\t" << locomotor[i].getCost() << "\t" << locomotor[i].getMaxSpeed() << "\t" << locomotor[i].getDescription() << endl;
 				}
 
