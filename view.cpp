@@ -1,6 +1,19 @@
 
 #include "view.h"
 
+void robotModel(vector<RobotModel> &model)
+{
+	int i = 0;
+
+	if (model.size() > 0) {
+		cout << "\nMODELS" << endl << "------" << endl;
+		cout << "Name\t\t\tModel #\tMax Speed\tCost\t" << endl;
+		cout << "-----------------------------------------------------" << endl;
+		for (i = 0; i < model.size(); i++) {
+			cout << model[i].getName() << "\t" << model[i].getModelNumber() << "\t" << model[i].getMaxSpeed() << "\t\t" << model[i].getPrice() << endl;
+		}
+	}
+}
 
 void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor) {
 
@@ -27,7 +40,7 @@ void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<Robot
 	if (battery.size() > 0) {
 		cout << endl << "BATTERY" << endl << "-------" << endl;
 		cout << "Name\tPart #\tWeight\tCost\tEnergy\tPower\tDescription" << endl;
-		cout << "-------------------------------------------" << endl;
+		cout << "-------------------------------------------------------------------" << endl;
 		for (i = 0; i < battery.size(); i++) {
 			cout << battery[i].getName() << "\t" << battery[i].getPartNumber() << "\t" << battery[i].getWeight() << "\t" << battery[i].getCost() << "\t" << battery[i].getEnergy() << "\t" << battery[i].getMaxPower() << "\t" << battery[i].getDescription() << endl;
 		}
@@ -36,7 +49,7 @@ void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<Robot
 	if (torso.size() > 0) {
 		cout << endl << "TORSO" << endl << "-----" << endl;
 		cout << "Name\tPart #\tWeight\tCost\tBattery\tDescription" << endl;
-		cout << "-------------------------------------------" << endl;
+		cout << "---------------------------------------------------" << endl;
 		for (i = 0; i < torso.size(); i++) {
 			cout << torso[i].getName() << "\t" << torso[i].getPartNumber() << "\t" << torso[i].getWeight() << "\t" << torso[i].getCost() << "\t" << torso[i].getCompartments() << "\t" << torso[i].getDescription() << endl;
 		}
@@ -45,7 +58,7 @@ void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<Robot
 	if (locomotor.size() > 0) {
 		cout << endl << "LOCOMOTOR" << endl << "---------" << endl;
 		cout << "Name\tPart #\tWeight\tCost\tSpeed\tDescription" << endl;
-		cout << "-------------------------------------------" << endl;
+		cout << "---------------------------------------------------" << endl;
 		for (i = 0; i < locomotor.size(); i++) {
 			cout << locomotor[i].getName() << "\t" << locomotor[i].getPartNumber() << "\t" << locomotor[i].getWeight() << "\t" << locomotor[i].getCost() << "\t" << locomotor[i].getMaxSpeed() << "\t" << locomotor[i].getDescription() << endl;
 		}
@@ -62,7 +75,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 		cout << "\nORDER" << endl << "-----" << endl;
 		cout << "1 - Buy a Model\n";
 		cout << "2 - Buy a Component\n";
-		cout << "3 - Quit\n";
+		cout << "3 - Quit to Create Menu\n";
 		cout << "Your Choice: ";
 
 		cin >> choice;
@@ -71,13 +84,13 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 		{
 		case 1:
 			if (model.size() != 0) {
-				cout << "Models" << endl << "----" << endl;
-				cout << "Name\t\t\tModel #\tMax Speed\tCost\t" << endl;
-				cout << "-----------------------------------------------------" << endl;
+				cout << "MODELS" << endl << "----" << endl;
+				cout << "Name\t\t\tModel#\tMax Speed\tCost\t" << endl;
+				cout << "----------------------------------------------------" << endl;
 				for (i = 0; i < model.size(); i++) {
 					cout << model[i].getName() << "\t" << model[i].getModelNumber() << "\t" << model[i].getMaxSpeed() << "\t\t" << model[i].getPrice() << endl;
 				}
-                cout << "Enter The Part # Of The Robot Model You Desire" << endl;
+                cout << "Enter The Part # Of The Robot Model You Desire: ";
                 cin >> request;
                 match = false;
                 for (i = 0; i < model.size(); i++) {
@@ -115,7 +128,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 			if(part == 1)
 			{
 				if (head.size() != 0) {
-					cout << "Head" << endl << "----" << endl;
+					cout << "HEAD" << endl << "----" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tDescription" << endl;
 					cout << "-------------------------------------------" << endl;
 					for (i = 0; i < head.size(); i++) {
@@ -152,7 +165,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 			else if(part == 2)
 			{
 				if (arm.size() != 0) {
-					cout << endl << "Arm" << endl << "---" << endl;
+					cout << endl << "ARM" << endl << "---" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tDescription" << endl;
 					cout << "-------------------------------------------" << endl;
 					for (i = 0; i < arm.size(); i++)
@@ -188,9 +201,9 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 			else if(part == 3)
 			{
 				if (battery.size() != 0) {
-					cout << endl << "Battery" << endl << "-------" << endl;
+					cout << endl << "BATTERY" << endl << "-------" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tEnergy\tMax Power\tDescription" << endl;
-					cout << "-------------------------------------------" << endl;
+					cout << "-------------------------------------------------------------------" << endl;
 					for (i = 0; i < battery.size(); i++)
 						cout << battery[i].getName() << "\t" << battery[i].getPartNumber() << "\t" << battery[i].getWeight() << "\t" << battery[i].getCost() << "\t" << battery[i].getEnergy() << "\t" << battery[i].getMaxPower() << "\t" << battery[i].getDescription() << endl;
 				}
@@ -224,9 +237,9 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 			else if(part == 4)
 			{
 				if (torso.size() != 0) {
-					cout << endl << "Torso" << endl << "-----" << endl;
+					cout << endl << "TORSO" << endl << "-----" << endl;
 					cout << "Name\tPart #\tWeight\tCost\t\tBattery Compartments\tDescription" << endl;
-					cout << "-------------------------------------------" << endl;
+					cout << "----------------------------------------------------------" << endl;
 					for (i = 0; i < torso.size(); i++)
 						cout << torso[i].getName() << "\t" << torso[i].getPartNumber() << "\t" << torso[i].getWeight() << "\t" << torso[i].getCost() << "\t" << torso[i].getCompartments() << "\t" << torso[i].getDescription() << endl;
 				}
@@ -259,9 +272,9 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 			else if(part == 5)
 			{
 				if (locomotor.size() != 0) {
-					cout << endl << "Locomotor" << endl << "---------" << endl;
+					cout << endl << "LOCOMOTOR" << endl << "---------" << endl;
 					cout << "Name\tPart #\tWeight\tCost\tMax Speed\tDescription" << endl;
-					cout << "-------------------------------------------" << endl;
+					cout << "----------------------------------------------------------" << endl;
 					for (i = 0; i < locomotor.size(); i++)
 						cout << locomotor[i].getName() << "\t" << locomotor[i].getPartNumber() << "\t" << locomotor[i].getWeight() << "\t" << locomotor[i].getCost() << "\t" << locomotor[i].getMaxSpeed() << "\t" << locomotor[i].getDescription() << endl;
 				}
@@ -305,8 +318,8 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 }
 
 void viewCustomer(Order &order) {
-    cout << "\nCustomers" << endl;
-    cout << "----------------" << endl;
+    cout << "\nCUSTOMERS" << endl;
+    cout << "---------" << endl;
     cout << order.this_customer->getName() << endl;
 }
 
@@ -314,9 +327,7 @@ void viewCustomer(Order &order) {
 void viewOrder(Order &order) {
 
     int i;
-
-
-	cout<<"\nORDER:\n------\n"<< endl;
+	cout<<"\nORDER:\n------"<< endl;
     cout << "Customer Name: " << order.this_customer->getName() << endl;
 	for(i = 0; i < order.robotModels.size(); ++i)
      {
@@ -328,8 +339,26 @@ void viewOrder(Order &order) {
      }
      order.robotPrice();
 	 cout<<"TOTAL: $"<<order.totalPrice()<< endl;
+}
 
+void viewBill(Order &order) {
 
+    int i, shipping = 10, tax = 0, total = 0;
+	cout<<"\nBILL:\n-----"<< endl;
+    cout << "Customer Name: " << order.this_customer->getName() << endl;
+	for(i = 0; i < order.robotModels.size(); ++i)
+    {
+         cout << order.robotModels[i].getName() << "\t\t$" << order.robotModels[i].getPrice() << endl;
+    }
+
+     for (i = 0; i < order.robotParts.size() ; i++) {
+        cout << order.robotParts[i].getName() << "\t\t$" << order.robotParts[i].getCost() << endl;
+     }
+     order.robotPrice();
+	 tax = order.totalPrice() * 0.0825;
+	 cout<<"SHIPPING: $"<<shipping<< endl;
+	 cout<<"TAX: $"<<tax<<endl;
+	 cout<<"TOTAL: $"<<order.totalPrice()+tax+shipping<< endl;
 }
 
 void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, Order &order) {
@@ -340,10 +369,9 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 		cout << "\nCREATE" << endl << "------" << endl;
 		cout << "1 - Order\n";
 		cout << "2 - Customer\n";
-		cout << "3 - Sales Associate\n";
-		cout << "4 - Robot Models\n";
-		cout << "5 - Robot Components\n";
-		cout << "6 - Quit to Main Menu\n";
+		cout << "3 - Robot Models\n";
+		cout << "4 - Robot Components\n";
+		cout << "5 - Quit to Main Menu\n";
 		cout << "Your Choice: ";
 
 		cin >> choice;
@@ -359,16 +387,14 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 			// rest of code here
 			break;
 		case 3:
-			cout << "Sales Assoiciate\n";
+			cout << "Robot Model\n";
+			robotModel(model);
 			break;
 		case 4:
-			cout << "Robot Model\n";
-			break;
-		case 5:
 			cout << "Robot Component\n";
 			robotComponent(head, arm, battery, torso, locomotor);
 			break;
-		case 6:
+		case 5:
 			cout << "Quit to Main Menu\n";
 			flag = false;
 			break;
@@ -389,11 +415,8 @@ void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBa
 	{
 		cout << "\nREPORT" << endl << "------" << endl;
 		cout << "1 - View Order\n";
-		cout << "2 - Customers\n";
-		cout << "3 - Sales Associates\n";
-		cout << "4 - Robot Models\n";
-		cout << "5 - Robot Parts\n";
-		cout << "6 - Quit to Main Menu\n";
+		cout << "2 - View Bill\n";
+		cout << "3 - Quit to Main Menu\n";
 		cout << "Your Choice: ";
 
 		cin >> choice;
@@ -404,21 +427,9 @@ void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBa
 			viewOrder(order);
 			break;
 		case 2:
-			cout << "Customers\n";
-			// rest of code here
+			viewBill(order);
 			break;
 		case 3:
-			cout << "Sales Assoiciates\n";
-			break;
-		case 4:
-			cout << "Robot Models\n";
-//			createMenu();
-			break;
-		case 5:
-			cout << "Robot Parts\n";
-			// rest of code here
-			break;
-		case 6:
 			cout << "Quit to Main Menu\n";
 			flag = false;
 			break;
