@@ -1,6 +1,5 @@
 
 #include "view.h"
-#include "robot_model.h"
 
 
 void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor) {
@@ -54,7 +53,7 @@ void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<Robot
 
 }
 
-void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
+void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, Order &order) {
 	int choice, part, request, index, i;
 	bool flag = true;
 	bool match = false;
@@ -78,7 +77,31 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				for (i = 0; i < model.size(); i++) {
 					cout << model[i].getName() << "\t" << model[i].getModelNumber() << "\t" << model[i].getMaxSpeed() << "\t\t" << model[i].getPrice() << endl;
 				}
+                cout << "Enter The Part # Of The Robot Model You Desire" << endl;
+                cin >> request;
+                match = false;
+                for (i = 0; i < model.size(); i++) {
+                    if (model[i].getModelNumber() == request) {
+                        order.addRobotModel(model[i]);
+                        match = true;
+                        index = i;
+                    }
+                }
+
+                if (match == false) {
+                    cout<<"\nThe Part # Of The Head You Desire Is Currently Not Available\n"<< endl;
+                }
+                else {
+                    cout << model[index].getName()<<" has been added to your cart"<< endl;
+					
+					//update the orders vector with the checked out item
+					//remove the checked out item from the vectors
+					model.erase(model.begin()+(index));
+                }
+
 			}
+
+
 			break;
 		case 2:
 			cout << "\n1 - Buy a Head\n";
@@ -106,6 +129,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				{
 					if( request == head[i].getPartNumber() ) 
 					{   
+                        order.addRobotPart(head[i]);
 						match = true;
 						index = i;
 						break;
@@ -121,8 +145,6 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
           			cout <<head[index].getName()<<" has been added to your cart"<< endl;
 					
 					//update the orders vector with the checked out item
-					prices.push_back(head[index].getCost());
-					names.push_back("Head: "+head[index].getName());
 					//remove the checked out item from the vectors
 					head.erase(head.begin()+(index));			 
 				}
@@ -143,6 +165,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				{
 					if( request == arm[i].getPartNumber() ) 
 					{   
+                        order.addRobotPart(arm[i]);
 						match = true;
 						index = i;
 						break;
@@ -158,8 +181,6 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
           			cout<<arm[index].getName()<<" has been added to your cart"<< endl;
 
 					//update the orders vector with the checked out item
-					prices.push_back(arm[index].getCost());
-					names.push_back("Arm: "+arm[index].getName());
 					//remove the checked out item from the vectors
 					arm.erase(arm.begin()+(index));
 				}
@@ -181,6 +202,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				{
 					if( request == battery[i].getPartNumber() ) 
 					{   
+                        order.addRobotPart(battery[i]);
 						match = true;
 						index = i;
 						break;
@@ -195,8 +217,6 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
      			{
           			cout<<battery[index].getName()<<" has been added to your cart"<< endl;
 					//update the orders vector with the checked out item
-					prices.push_back(battery[index].getCost());
-					names.push_back("Battery: "+battery[index].getName());
 					//remove the checked out item from the vectors
 					battery.erase(battery.begin()+(index));
 				}
@@ -217,6 +237,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				{
 					if( request == torso[i].getPartNumber() ) 
 					{   
+                        order.addRobotPart(torso[i]);
 						match = true;
 						index = i;
 						break;
@@ -231,8 +252,6 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
      			{
           			cout<<torso[index].getName()<<" has been added to your cart"<< endl;
 					//update the orders vector with the checked out item
-					prices.push_back(torso[index].getCost());
-					names.push_back("Torso: "+torso[index].getName());
 					//remove the checked out item from the vectors
 					torso.erase(torso.begin()+(index));
 				}
@@ -254,6 +273,7 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 				{
 					if( request == locomotor[i].getPartNumber() ) 
 					{   
+                        order.addRobotPart(locomotor[i]);
 						match = true;
 						index = i;
 						break;
@@ -268,8 +288,6 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
      			{
           			cout<<locomotor[index].getName()<<" has been added to your cart"<< endl;
 					//update the orders vector with the checked out item
-					prices.push_back(locomotor[index].getCost());
-					names.push_back("Locomotor: "+locomotor[index].getName());
 					//remove the checked out item from the vectors
 					locomotor.erase(locomotor.begin()+(index));
 				}
@@ -286,21 +304,26 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 	}while(flag != false);
 }
 
-void viewOrder(vector<int> &prices, vector<string> &names) {
-	int total = 0, i;
-	for(i = 0; i < prices.size(); i++)
-		total += prices[i];
+void viewOrder(Order &order) {
+
+    int i;
 
 	cout<<"\nORDER:\n------\n"<< endl;
-	for(i = 0; i < prices.size(); ++i)
+	for(i = 0; i < order.robotModels.size(); ++i)
      {
-         cout<<(i+1)<<") "<< names[i];
-		 cout<<" $"<<prices[i]<< endl;
+         cout << order.robotModels[i].getName() << "\t\t$" << order.robotModels[i].getPrice() << endl;
      }
-	 cout<<"TOTAL: $"<<total<< endl;
+
+     for (i = 0; i < order.robotParts.size() ; i++) {
+        cout << order.robotParts[i].getName() << "\t\t$" << order.robotParts[i].getCost() << endl;
+     }
+     order.robotPrice();
+	 cout<<"TOTAL: $"<<order.totalPrice()<< endl;
+
+
 }
 
-void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
+void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, Order &order) {
 	int choice;
 	bool flag = true;
 	do
@@ -319,7 +342,7 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 		switch (choice)
 		{
 		case 1:
-			makeOrder(head, arm, battery, torso, locomotor, model, prices, names);
+			makeOrder(head, arm, battery, torso, locomotor, model, order);
 			break;
 		case 2:
 			cout << "Customer\n";
@@ -349,7 +372,7 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 }
 
 
-void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
+void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, Order &order) {
 	int choice;
 	bool flag = true;
 	do
@@ -368,7 +391,7 @@ void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBa
 		switch (choice)
 		{
 		case 1:
-			viewOrder(prices, names);
+			viewOrder(order);
 			break;
 		case 2:
 			cout << "Customers\n";

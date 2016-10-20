@@ -1,5 +1,7 @@
 #include "order.h"
 
+
+
 void Order::addRobotModel(RobotModel robotModel) {
     robotModels.push_back(robotModel);
 }
@@ -15,7 +17,7 @@ void Order::robotPrice() {
     }
 
     for (i = 0; i < robotParts.size(); i++) {
-        this_totalPrice += robotParts[i].getPrice();
+        this_totalPrice += robotParts[i].getCost();
     }
 }
 
@@ -24,4 +26,5 @@ void Order::robotPrice() {
 double Order::totalPrice() {
     return this_totalPrice;
 }
+
 

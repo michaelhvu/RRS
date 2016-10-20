@@ -22,6 +22,8 @@ int main() {
 	vector<int> prices;
 	vector<string> names;
 
+	Order order(35813);
+
 
 	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
 	heads.push_back(RobotHead("Michael", 1101, 50, 510, "Michael's head"));
@@ -78,11 +80,11 @@ int main() {
 		{
 		case 1:
 			cout << "Create Robot\n";
-			createMenu(heads, arms, batteries, torsos, locomotors, robots, prices, names);
+			createMenu(heads, arms, batteries, torsos, locomotors, robots, order);
 			break;
 		case 2:
 			cout << "Report of Robot\n";
-			createReport(heads, arms, batteries, torsos, locomotors, robots, prices, names);
+			createReport(heads, arms, batteries, torsos, locomotors, robots, order);
 			break;
 		case 3:
 			cout << "End of Program.\n";

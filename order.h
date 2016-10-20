@@ -1,5 +1,5 @@
 #ifndef __ROBOT_ORDER
-#define __ORDER 2016
+#define __ROBOT_ORDER 2016
 
 #include <vector>
 #include "robot_model.h"
@@ -11,6 +11,7 @@
 #include "robot_arm.h"
 #include "robot_part.h"
 
+using namespace std;
 
 class Order {
     private:
@@ -22,10 +23,11 @@ class Order {
         vector<RobotModel> robotModels;
         vector<RobotPart> robotParts;
 
+        Order(int number) : orderNumber(number) { } 
         void addRobotModel(RobotModel robotModel);
         void addRobotPart(RobotPart robotPart);
         void robotPrice();
         double totalPrice();
-}
+};
 
 #endif
