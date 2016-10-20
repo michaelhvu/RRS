@@ -304,11 +304,20 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 	}while(flag != false);
 }
 
+void viewCustomer(Order &order) {
+    cout << "\nCustomers" << endl;
+    cout << "----------------" << endl;
+    cout << order.this_customer->getName() << endl;
+}
+
+
 void viewOrder(Order &order) {
 
     int i;
 
+
 	cout<<"\nORDER:\n------\n"<< endl;
+    cout << "Customer Name: " << order.this_customer->getName() << endl;
 	for(i = 0; i < order.robotModels.size(); ++i)
      {
          cout << order.robotModels[i].getName() << "\t\t$" << order.robotModels[i].getPrice() << endl;
@@ -346,6 +355,7 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 			break;
 		case 2:
 			cout << "Customer\n";
+            viewCustomer(order);
 			// rest of code here
 			break;
 		case 3:

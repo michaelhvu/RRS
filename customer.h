@@ -1,11 +1,9 @@
-#ifndef __ROBOT_MODEL
-#define __ROBOT_MODEL 2016
+#ifndef __ROBOT_CUSTOMER
+#define __ROBOT_CUSTOMER 2016
 
 #include <iostream>
 #include <vector>
 #include <string>
-#include "view.h"
-#include "order.h"
 
 using namespace std;
 using std::string;
@@ -15,7 +13,6 @@ class Customer {
         string name;
         int customerNumber;
         double wallet;
-        vector<Order> order;
 
     public:
         Customer(string custname, int custNumber, double custwallet)
@@ -23,7 +20,7 @@ class Customer {
         string getName();
         int getCustomerNumber();
         double getWallet();
-        double getRemainingWallet();
+        double getRemainingWallet(double money);
         
 };
 

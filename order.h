@@ -10,20 +10,21 @@
 #include "robot_battery.h"
 #include "robot_arm.h"
 #include "robot_part.h"
+#include "customer.h"
 
 using namespace std;
 
 class Order {
     private:
         int orderNumber;
-//      vector<Customer> customers;
         double this_totalPrice = 0;                     
 
     public:
+        Customer *this_customer;
         vector<RobotModel> robotModels;
         vector<RobotPart> robotParts;
 
-        Order(int number) : orderNumber(number) { } 
+        Order(Customer customer, int number) : this_customer(&customer), orderNumber(number) { } 
         void addRobotModel(RobotModel robotModel);
         void addRobotPart(RobotPart robotPart);
         void robotPrice();

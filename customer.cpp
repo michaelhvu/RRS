@@ -1,23 +1,19 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include "view.h"
-#include "order.h"
 
-string getName() {
+#include "customer.h"
+
+string Customer::getName() {
     return name;
 }
 
-int getCustomerNumber() {
+int Customer::getCustomerNumber() {
     return customerNumber;
 }
 
-double getWallet() {
+double Customer::getWallet() {
     return wallet;
 }
 
-double getRemainingWallet() {
-    int currentBill, size=order.size();
-    currentBill=order.getTotalPrice();
-    return wallet-currentBill;
+double Customer::getRemainingWallet(double money) {
+    wallet = wallet - money;
+    return wallet;
 }

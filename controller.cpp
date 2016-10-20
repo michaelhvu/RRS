@@ -10,6 +10,8 @@
 #include "robot_arm.h"
 #include "view.h"
 #include "order.h"
+#include "customer.h"
+
 
 int main() {
 
@@ -22,7 +24,8 @@ int main() {
 	vector<int> prices;
 	vector<string> names;
 
-	Order order(35813);
+	Customer Doug("Douglas", 1432, 1000000);
+	Order order(Doug,35813);
 
 
 	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
@@ -46,8 +49,8 @@ int main() {
 	locomotors.push_back(RobotLocomotor("V8", 4402, 500, 400, "Fast", 140));
 
 	torsos.push_back(RobotTorso("Ver. 1", 5500, 300, 5000, "Box Shaped Torso", 2));
-	torsos.push_back(RobotTorso("Ver. 1.7", 5501, 300, 5000, "Green Torso"));
-	torsos.push_back(RobotTorso("Ver. 2", 5502, 300, 8000, "Gold Plated Torso", 3));
+	torsos.push_back(RobotTorso("Ver. 1.7", 5501, 300, 5000, "Green Torso", 2));
+	torsos.push_back(RobotTorso("Ver. 2", 5502, 300, 8000, "Gold Plated Torso", 2));
 
 	robots.push_back(RobotModel("The Hulking Monster", 7001));
 	robots[0].addPart(heads[2]);
