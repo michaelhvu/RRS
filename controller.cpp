@@ -48,8 +48,18 @@ int main() {
 	torsos.push_back(RobotTorso("Ver. 1", 5500, 300, 5000, "Box Shaped Torso", 2));
 	torsos.push_back(RobotTorso("Ver. 2", 5501, 300, 8000, "Gold Plated Torso", 3));
 
-
-
+	robots.push_back(RobotModel("The Hulking Monster", 7001));
+	robots[0].addPart(heads[1]);
+	robots[0].addPart(arms[2]);
+	robots[0].addPart(batteries[2]);
+	robots[0].addPart(locomotors[1]);
+	robots[0].addPart(torsos[0]);
+	robots.push_back(RobotModel("Very Boring Robot", 7002));
+	robots[1].addPart(heads[0]);
+	robots[1].addPart(arms[1]);
+	robots[1].addPart(batteries[0]);
+	robots[1].addPart(locomotors[0]);
+	robots[1].addPart(torsos[0]);
 
 	int choice;
 	bool shopOpen = true;
@@ -68,11 +78,11 @@ int main() {
 		{
 		case 1:
 			cout << "Create Robot\n";
-			createMenu(heads, arms, batteries, torsos, locomotors, prices, names);
+			createMenu(heads, arms, batteries, torsos, locomotors, robots, prices, names);
 			break;
 		case 2:
 			cout << "Report of Robot\n";
-			createReport(heads, arms, batteries, torsos, locomotors, prices, names);
+			createReport(heads, arms, batteries, torsos, locomotors, robots, prices, names);
 			break;
 		case 3:
 			cout << "End of Program.\n";

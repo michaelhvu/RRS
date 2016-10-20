@@ -1,5 +1,6 @@
 
 #include "view.h"
+#include "robot_model.h"
 
 
 void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor) {
@@ -53,7 +54,7 @@ void robotComponent(vector<RobotHead> &head, vector<RobotArm> &arm, vector<Robot
 
 }
 
-void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<int> &prices, vector<string> &names) {
+void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
 	int choice, part, request, index, i;
 	bool flag = true;
 	bool match = false;
@@ -70,7 +71,15 @@ void makeOrder(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatte
 		switch (choice)
 		{
 		case 1:
-
+			if (model.size() != 0) {
+				cout << "Models" << endl << "----" << endl;
+				cout << "Name\t\t\tModel #\tMax Speed\tCost\t" << endl;
+				cout << "-----------------------------------------------------" << endl;
+				for (i = 0; i < model.size(); i++) {
+					cout << model[i].getName() << "\t" << model[i].getModelNumber() << "\t" << model[i].getMaxSpeed() << "\t\t" << model[i].getPrice() << endl;
+				}
+			}
+			break;
 		case 2:
 			cout << "\n1 - Buy a Head\n";
 			cout << "2 - Buy an Arm\n";
@@ -291,7 +300,7 @@ void viewOrder(vector<int> &prices, vector<string> &names) {
 	 cout<<"TOTAL: $"<<total<< endl;
 }
 
-void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<int> &prices, vector<string> &names) {
+void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
 	int choice;
 	bool flag = true;
 	do
@@ -310,7 +319,7 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 		switch (choice)
 		{
 		case 1:
-			makeOrder(head, arm, battery, torso, locomotor, prices, names);
+			makeOrder(head, arm, battery, torso, locomotor, model, prices, names);
 			break;
 		case 2:
 			cout << "Customer\n";
@@ -340,7 +349,7 @@ void createMenu(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBatt
 }
 
 
-void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<int> &prices, vector<string> &names) {
+void createReport(vector<RobotHead> &head, vector<RobotArm> &arm, vector<RobotBattery> &battery, vector<RobotTorso> &torso, vector<RobotLocomotor> &locomotor, vector<RobotModel> &model, vector<int> &prices, vector<string> &names) {
 	int choice;
 	bool flag = true;
 	do
