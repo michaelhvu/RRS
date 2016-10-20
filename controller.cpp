@@ -31,34 +31,33 @@ int main() {
 	heads.push_back(RobotHead("Goku", 1103, 11, 75, "Head that looks like Goku"));
 	heads.push_back(RobotHead("Ang", 1104, 17, 120, "Head that looks like Ang"));
 
-	arms.push_back(RobotArm("Model X", 2200, 10, 50, "Can pick up cups"));
 	arms.push_back(RobotArm("Model A", 2201, 10, 20, "Useless arm"));
-	arms.push_back(RobotArm("Model Z", 2202, 10, 1000, "Can pick up any object"));
+	arms.push_back(RobotArm("Model B", 2202, 12, 35, "Swinging arm"));
+	arms.push_back(RobotArm("Model R", 2215, 13, 40, "Karate Chop arm"));
+	arms.push_back(RobotArm("Model X", 2224, 14, 50, "Can pick up cups"));
+	arms.push_back(RobotArm("Model Z", 2226, 15, 1000, "Can pick up any object"));
 
-
-	arms.push_back(RobotArm("Model X", 2200, 10, 50, "Can pick up cups"));
-	arms.push_back(RobotArm("Model A", 2201, 10, 20, "Useless arm"));
-	arms.push_back(RobotArm("Model Z", 2202, 10, 1000, "Can pick up any object"));
-
-	batteries.push_back(RobotBattery("Dura", 3300, 2, 10, "Long lasting batteries", 10, 30));
-	batteries.push_back(RobotBattery("Dura", 3301, 2, 20, "Long lasting batteries", 15, 30));
+	batteries.push_back(RobotBattery("Old", 3300, 2, 10, "Short lasting batteries", 10, 30));
+	batteries.push_back(RobotBattery("Rechargable", 3301, 4, 35, "Rechargable batteries", 15, 25));
 	batteries.push_back(RobotBattery("Dura", 3302, 2, 5, "Long lasting batteries", 5, 30));
 
-	locomotors.push_back(RobotLocomotor("V4", 4401, 400, 2000, "Medium", 60));
-	locomotors.push_back(RobotLocomotor("V8", 4402, 200, 4000, "Fast", 140));
+	locomotors.push_back(RobotLocomotor("V2", 4400, 275, 200, "Slow", 20));
+	locomotors.push_back(RobotLocomotor("V4", 4401, 350, 300, "Medium", 60));
+	locomotors.push_back(RobotLocomotor("V8", 4402, 500, 400, "Fast", 140));
 
 	torsos.push_back(RobotTorso("Ver. 1", 5500, 300, 5000, "Box Shaped Torso", 2));
-	torsos.push_back(RobotTorso("Ver. 2", 5501, 300, 8000, "Gold Plated Torso", 3));
+	torsos.push_back(RobotTorso("Ver. 1.7", 5501, 300, 5000, "Green Torso"));
+	torsos.push_back(RobotTorso("Ver. 2", 5502, 300, 8000, "Gold Plated Torso", 3));
 
 	robots.push_back(RobotModel("The Hulking Monster", 7001));
-	robots[0].addPart(heads[1]);
+	robots[0].addPart(heads[2]);
 	robots[0].addPart(arms[2]);
 	robots[0].addPart(batteries[2]);
 	robots[0].addPart(locomotors[1]);
-	robots[0].addPart(torsos[0]);
+	robots[0].addPart(torsos[1]);
 	robots.push_back(RobotModel("Very Boring Robot", 7002));
 	robots[1].addPart(heads[0]);
-	robots[1].addPart(arms[1]);
+	robots[1].addPart(arms[0]);
 	robots[1].addPart(batteries[0]);
 	robots[1].addPart(locomotors[0]);
 	robots[1].addPart(torsos[0]);
