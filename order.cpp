@@ -1,10 +1,27 @@
-#ifndef __ORDER
-#define __ORDER 2016
+#include "order.h"
 
-class Order {
-    private:
-        int orderNumber;
-        
-
-    public:
+void Order::addRobotModel(RobotModel robotModel) {
+    robotModels.push_back(robotModel);
 }
+
+void Order::addRobotPart(RobotPart robotPart) {
+    robotParts.push_back(robotPart);
+}
+
+void Order::robotPrice() {
+    int i;
+    for (i = 0; i < robotModels.size(); i++) {
+        this_totalPrice += robotModels[i].getPrice();
+    }
+
+    for (i = 0; i < robotParts.size(); i++) {
+        this_totalPrice += robotParts[i].getPrice();
+    }
+}
+
+
+
+double Order::totalPrice() {
+    return this_totalPrice;
+}
+

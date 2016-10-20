@@ -9,6 +9,7 @@
 #include "robot_battery.h"
 #include "robot_arm.h"
 #include "view.h"
+#include "order.h"
 
 int main() {
 
@@ -21,12 +22,6 @@ int main() {
 	vector<int> prices;
 	vector<string> names;
 
-	robots.clear();
-	heads.clear();
-	arms.clear();
-	batteries.clear();
-	torsos.clear();
-	locomotors.clear();
 
 	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
 	heads.push_back(RobotHead("Michael", 1101, 50, 510, "Michael's head"));

@@ -21,7 +21,7 @@ class RobotModel {
 		int this_numberOfPieces;
 		int this_maxSpeed;
 		double this_price;
-		vector<any> *this_robotParts;
+		vector<RobotPart> *this_robotParts;
 
 
 	public:
