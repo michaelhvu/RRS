@@ -26,6 +26,8 @@ robot_battery.o: robot_battery.cpp robot_battery.h robot_part.h
 	$(CXX) $(CXXFLAGS) -w -c robot_battery.cpp
 view.o: view.cpp view.h robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h
 	$(CXX) $(CXXFLAGS) -w -c view.cpp
+customer.o: customer.cpp customer.h
+	$(CXX) $(CXXFLAGS) -w -c customer.cpp
 	
 
 
