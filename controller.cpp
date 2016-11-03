@@ -11,7 +11,16 @@
 #include "view.h"
 #include "order.h"
 #include "customer.h"
+#include "FL/Fl.H"
+#include "FL/Fl_Window.H"
+#include "FL/Fl_Box.H"
+#include "FL/fl_ask.H"
 
+Fl_Window *win;
+
+void CloseCB(Fl_Widget* w, void* p) {
+	win->hide();
+}
 
 int main() {
 
@@ -24,8 +33,8 @@ int main() {
 	vector<int> prices;
 	vector<string> names;
 
-	Customer Doug("Douglas", 1432, 1000000);
-	Order order(Doug,35813);
+	Customer Michael("Michael", 1432, 1000000);
+	Order order(Michael,35813);
 
 
 	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
@@ -99,5 +108,14 @@ int main() {
 			break;
 		}
 	}
+	const int X = 640; 
+	const int Y = 480;
+	// Create a window // Create a window
+	win = new Fl_Window{X, Y, "Robbie Robot Shop Manager"};
+
+	// Wrap it up and let FLTK do its thing // Wrap it up and let FLTK do its thing
+	win->end();
+	win->show();
+	return(Fl::run());
 	return 0;
 }
