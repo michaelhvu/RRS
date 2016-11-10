@@ -1,4 +1,4 @@
-#include "robot_part.h";
+#include "robot_part.h"
 
 
 string RobotPart::getName() {

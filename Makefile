@@ -5,7 +5,7 @@ CXXFLAGS = $(shell fltk-config --use-gl --use-images --cxxflags ) $(CXXOPTS)
 LDFLAGS = $(shell fltk-config --use-gl --use-images --ldflags )
 LDSTATIC = $(shell fltk-config --use-gl --use-images --ldstaticflags )
 LINK = $(CXX)
-TARGET = executable
+TARGET = a.out
 OBJS = controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o view.o customer.o order.o
 SRCS = controller.cxx robot_model.cxx robot_part.cxx robot_head.cxx robot_locomotor.cxx robot_torso.cxx robot_arm.cxx robot_battery.cxx view.cxx customer.cxx order.cxx
 .SUFFIXES: .o .cxx
