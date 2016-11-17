@@ -21,8 +21,6 @@ void Order::robotPrice() {
     }
 }
 
-
-
 double Order::totalPrice() {
     return this_totalPrice;
 }

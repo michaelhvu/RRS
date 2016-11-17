@@ -1,18 +1,11 @@
 #ifndef __ROBOT_ORDER
 #define __ROBOT_ORDER 2016
 
-#include <vector>
 #include "robot_model.h"
-#include "robot_head.h"
-#include "robot_part.h"
-#include "robot_locomotor.h"
-#include "robot_torso.h"
-#include "robot_battery.h"
-#include "robot_arm.h"
 #include "robot_part.h"
 #include "customer.h"
+#include "sales_associate.h"
 
-using namespace std;
 
 class Order {
     private:
@@ -20,11 +13,12 @@ class Order {
         double this_totalPrice = 0;                     
 
     public:
+        SalesAssociate *this_sales;
         Customer *this_customer;
-        vector<RobotModel> robotModels;
-        vector<RobotPart> robotParts;
+        std::vector<RobotModel> robotModels;
+        std::vector<RobotPart> robotParts;
 
-        Order(Customer customer, int number) : this_customer(&customer), orderNumber(number) { } 
+        Order(Customer *customer, SalesAssociate *sales, int number) : this_customer(customer), this_sales(sales), orderNumber(number) { } 
         void addRobotModel(RobotModel robotModel);
         void addRobotPart(RobotPart robotPart);
         void robotPrice();

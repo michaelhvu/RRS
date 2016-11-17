@@ -6,8 +6,8 @@ LDFLAGS = $(shell fltk-config --use-gl --use-images --ldflags )
 LDSTATIC = $(shell fltk-config --use-gl --use-images --ldstaticflags )
 LINK = $(CXX)
 TARGET = a.out
-OBJS = controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o view.o customer.o order.o
-SRCS = controller.cxx robot_model.cxx robot_part.cxx robot_head.cxx robot_locomotor.cxx robot_torso.cxx robot_arm.cxx robot_battery.cxx view.cxx customer.cxx order.cxx
+OBJS = controller.o robot_model.o robot_part.o robot_head.o robot_locomotor.o robot_torso.o robot_arm.o robot_battery.o view.o customer.o order.o sales_associate.o
+SRCS = controller.cxx robot_model.cxx robot_part.cxx robot_head.cxx robot_locomotor.cxx robot_torso.cxx robot_arm.cxx robot_battery.cxx view.cxx customer.cxx order.cxx sales_associate.cxx
 .SUFFIXES: .o .cxx
 %.o: %.cxx
 	$(CXX) $(CXXFLAGS) $(DEBUG) -c $(CXXOPTS) $<
@@ -25,6 +25,7 @@ robot_battery.o: robot_battery.cpp robot_battery.h robot_part.h
 view.o: view.cpp view.h robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h order.h
 customer.o: customer.cpp customer.h order.h
 order.o: order.cpp order.h robot_head.h robot_part.h robot_battery.h robot_locomotor.h robot_model.h robot_torso.h customer.h
+sales_associate.o: sales_associate.cpp sales_associate.cpp order.h
 
 clean: $(TARGET) $(OBJS)
 	rm -f *.o 2> /dev/null
