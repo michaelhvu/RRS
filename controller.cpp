@@ -21,23 +21,40 @@
 #include <FL/Fl_Multiline_Input.H>
 #include <FL/Fl_Input.H>
 #include <FL/Fl_Return_Button.H>
+#include <FL/Fl_Output.H>
+#include <FL/Fl_JPEG_Image.H>
+#include <Fl/Fl_Shared_Image.H>
 
 // Declarations
 class OrderWindow;
 class SelectPart;
+class PictureWindow;
 class HeadPart;
 class TorsoPart;
 class LocomotorPart;
 class ArmPart;
 class BatteryPart;
+class CreateCustomer;
+class CreateSalesAssociate;
+class CreateRobotModel;
+class PriceWindow;
+class RobotModelPicture;
 void OrderCB(Fl_Widget *w, void *p);
 void SelectPartCB(Fl_Widget *w, void *p);
+void CustomerDialogCB(Fl_Widget *w, void *p);
+void SalesDialogCB(Fl_Widget *w, void *p);
+void ModelDialogCB(Fl_Widget *w, void *p);
+void NextPictureCB(Fl_Widget *w, void *p);
+void RobotModelPicturesCB(Fl_Widget *w, void *p);
 void CreateRobotCB(Fl_Widget *w, void *p);
 void CreateHeadCB(Fl_Widget *w, void *p);
+void CreateModelCB(Fl_Widget *w, void *p);
 void CreateLocomotorCB(Fl_Widget *w, void *p);
 void CreateArmCB(Fl_Widget *w, void *p);
 void CreateBatteryCB(Fl_Widget *w, void *p);
 void CreateTorsoCB(Fl_Widget *w, void *p);
+void CreateCustomerCB(Fl_Widget *w, void *p);
+void CreateSalesCB(Fl_Widget *w, void *p);
 void nameCB(Fl_Widget *w, void *p);
 void CancelHeadDialogCB(Fl_Widget *w, void *p);
 void CancelLocomotorDialogCB(Fl_Widget *w, void *p);
@@ -45,13 +62,23 @@ void CancelTorsoDialogCB(Fl_Widget *w, void *p);
 void CancelBatteryDialogCB(Fl_Widget *w, void *p);
 void CancelArmDialogCB(Fl_Widget *w, void *p);
 void CreatePartCB(Fl_Widget *w, void *p);
+void CancelCustomerDialogCB(Fl_Widget *w, void *p);
+void CancelSalesDialogCB(Fl_Widget *w, void *p);
+void CancelModelDialogCB(Fl_Widget *w, void *p);
+void CancelOrderCB(Fl_Widget *w, void *p);
+void CancelPictureDialogCB(Fl_Widget *w, void *p);
+void ModelPictureCB(Fl_Widget *w, void *p);
 
 // Widgets
 Fl_Window *win;
 Fl_Menu_Bar *menubar;
 View *view;
+CreateRobotModel *robotWindow;
+CreateCustomer *customerWindow;
+CreateSalesAssociate *salesWindow;
 OrderWindow *orderWindow;
 SelectPart *selectPart;
+RobotModelPicture *pictureWindow;
 HeadPart *head;
 LocomotorPart *locomotor;
 TorsoPart *torso;
@@ -63,6 +90,10 @@ vector<RobotArm> arms;
 vector<RobotBattery> batteries;
 vector<RobotTorso> torsos;
 vector<RobotLocomotor> locomotors;
+vector<Customer> customers;
+vector<SalesAssociate> sales;
+vector<Order> orders;
+
 
 
 class CreatePart {
@@ -79,8 +110,7 @@ class CreatePart {
 			weight->align(FL_ALIGN_LEFT);	
 
 			cost = new Fl_Input(120, 100, 210, 25, "Cost:");
-			cost->align(FL_ALIGN_LEFT);
-				
+			cost->align(FL_ALIGN_LEFT);		
 		}
 
 		void show() {
@@ -351,31 +381,61 @@ class SelectPart {
 		Fl_Button *next;
 };
 
-class OrderWindow {
-
+class PictureWindow {
 	public:
-		OrderWindow() {
-			window = new Fl_Window(500,500, "Create Robot Part");
-			button = new Fl_Button(50, 50, 60, 25, "Click me");
-			choice = new Fl_Choice(100, 100, 130, 25, "Type:");
-//			multiText = new Fl_Multiline_Output(200, 200, 100, 100);
+		PictureWindow(RobotModel Robot_Model, int number) {
+			this_number = number;
+			window = new Fl_Window(400, 350, "Robot Model");
+			name = new Fl_Output(140, 10, 210, 25, "Model Name:");
+			name->value(Robot_Model.getName().c_str());
+			part_number = new Fl_Output(140, 40, 210, 25, "Model Part Number:");
+			part_number->value(to_string(Robot_Model.getModelNumber()).c_str());
 
+			pictureNames.push_back("full_business_can.jpg");
+			pictureNames.push_back("full_button_can.jpg");
+			pictureNames.push_back("full_humanoid_soldier.jpg");
+			pictureNames.push_back("full_medic_can.jpg");
+			pictureNames.push_back("full_orange_can.jpg");
+			pictureNames.push_back("full_orange_humanoid_meditating.jpg");
+			pictureNames.push_back("full_orange_humanoid_with_laptop_computer.jpg");
+			pictureNames.push_back("full_white_can_w_antennae.jpg");
 
-			choice->add("Robot Model", 0, (Fl_Callback *)SelectPartCB);
-			choice->add("Robot Head", 0, (Fl_Callback *)SelectPartCB);
-			choice->add("Robot Locomotor", 0, (Fl_Callback *)SelectPartCB);
-			choice->add("Robot Torso", 0, (Fl_Callback *)SelectPartCB);
-			choice->add("Robot Battery", 0, (Fl_Callback *)SelectPartCB);
-			choice->add("Robot Arm", 0, (Fl_Callback *)SelectPartCB);
-			choice->value(0);
+			box = new Fl_Box(170, 150, 50, 50);
+			jpg = new Fl_JPEG_Image(pictureNames[number].c_str());
+			temp = jpg->copy(200,200);
 
-			button->callback((Fl_Callback *)OrderCB, 0);
+			box->image(temp);
+		}
 
-//			multiText->value("Hello");
+		void show() {
+			window->show();
+		}
 
-//			text = new Fl_Text_Selection();
-			window->color(FL_WHITE);
-			window->end();
+	private:
+		int this_number;
+		vector<string> pictureNames;
+		Fl_Window *window;
+		Fl_Output *name;
+		Fl_Output *part_number;
+		Fl_Box *box;
+		Fl_JPEG_Image *jpg;
+		Fl_Image *temp;
+};
+
+class RobotModelPicture {
+	public:
+		RobotModelPicture() {
+			window = new Fl_Window(340, 80, "List of Robot Models");
+			model = new Fl_Choice(120, 10, 210, 25, "Select Model:");
+
+			next = new Fl_Return_Button(140, 40, 125, 25, "Next");
+			next->callback((Fl_Callback *)ModelPictureCB);
+			cancel = new Fl_Button(270, 40, 60, 25, "Cancel");
+			cancel->callback((Fl_Callback *)CancelPictureDialogCB);
+
+			for (int i = 0; i < robots.size(); i++) {
+				model->add(robots[i].getName().c_str());
+			}
 		}
 
 		void show() {
@@ -386,37 +446,375 @@ class OrderWindow {
 			window->hide();
 		}
 
-		int value() {
-			cout << robots[0].getName();
-			return choice->value();
+		void showModel() {
+			if (model->value() != -1) {
+				Pic_Window = new PictureWindow(robots[model->value()], model->value());
+				Pic_Window->show();
 
+			}
+		}
+
+	private:
+		Fl_Window *window;
+		Fl_Return_Button *next;
+		Fl_Button *cancel;
+		Fl_Choice *model;
+		PictureWindow *Pic_Window;
+
+};
+
+
+class CreateRobotModel {
+	public:
+
+		CreateRobotModel() {
+
+			window = new Fl_Window(340, 260, "Create Robot Model");
+			name = new Fl_Input(120, 10, 210, 25, "Name:");
+			name->align(FL_ALIGN_LEFT);
+
+			number = new Fl_Input(120, 40, 210, 25, "Part Number:");
+			number->align(FL_ALIGN_LEFT);	
+
+			head = new Fl_Choice(120, 70, 210, 25, "Head Part:");
+
+			for (int i = 0; i < heads.size(); i++) {
+				head->add(heads[i].getName().c_str());
+			}
+
+			arm = new Fl_Choice(120, 100, 210, 25, "Arm Part:");
+
+			for (int i = 0; i < arms.size(); i++) {
+				arm->add(arms[i].getName().c_str());
+			}
+			
+			locomotor = new Fl_Choice(120, 130, 210, 25, "Locomotor Part:");
+
+			for (int i = 0; i < locomotors.size(); i++) {
+				locomotor->add(locomotors[i].getName().c_str());
+			}
+
+			torso = new Fl_Choice(120, 160, 210, 25, "Torso Part:");
+
+			for (int i = 0; i < torsos.size(); i++) {
+				torso->add(torsos[i].getName().c_str());
+			}
+			
+			battery = new Fl_Choice(120, 190, 210, 25, "Battery Part:");			
+			for (int i = 0; i < batteries.size(); i++) {
+				battery->add(batteries[i].getName().c_str());
+			}
+
+			create = new Fl_Return_Button(140, 220, 125, 25, "Create");
+			create->callback((Fl_Callback *)CreateModelCB, 0);
+
+			cancel = new Fl_Button(270, 220, 60, 25, "Cancel");
+			cancel->callback((Fl_Callback *)CancelModelDialogCB, 0);
+		}
+
+		void show() {
+			window->show();
+		}
+
+		void hide() {
+			window->hide();
+		}
+
+		void CreateModel() {
+			
+			if (strcmp(name->value(), "") != 0 && strcmp(number->value(), "") != 0 &&
+				head->value() != -1 && arm->value() != -1 && locomotor->value() != -1 &&
+				torso->value() != -1 && battery->value() != -1) {
+
+				RobotModel model(name->value(), atoi(number->value()));
+				model.addPart(heads[head->value()]);
+				model.addPart(arms[arm->value()]);
+				model.addPart(locomotors[locomotor->value()]);
+				model.addPart(torsos[torso->value()]);
+				model.addPart(batteries[battery->value()]);
+
+				robots.push_back(model);
+
+				heads.erase(heads.begin() + head->value());
+				arms.erase(arms.begin() + arm->value());
+				locomotors.erase(locomotors.begin() + locomotor->value());
+				torsos.erase(torsos.begin() + torso->value());
+				batteries.erase(batteries.begin() + battery->value());
+
+				for (int i = 0; i < robots.size(); i++) {
+					cout << robots[i].getName() << endl;
+				}
+
+			}
+			else {
+				cout << "Please fill in the entire form" << endl;
+			}	
+		}
+		
+
+	private:
+		RobotModel *robotModel;
+		Fl_Window *window;
+		Fl_Button *cancel;
+		Fl_Return_Button *create;
+		Fl_Input *name;
+		Fl_Input *number;
+		Fl_Choice *head;
+		Fl_Choice *arm;
+		Fl_Choice *locomotor;
+		Fl_Choice *torso;
+		Fl_Choice *battery;
+};
+
+class CreateCustomer {
+	public:
+		CreateCustomer() {
+			window = new Fl_Window(340, 140, "Create Customer");
+			create = new Fl_Return_Button(140, 100, 125, 25, "Create");
+			create->callback((Fl_Callback *)CreateCustomerCB, 0);
+
+			cancel = new Fl_Button(270, 100, 60, 25, "Cancel");
+			cancel->callback((Fl_Callback *)CancelCustomerDialogCB, 0);
+
+			name = new Fl_Input(120, 10, 210, 25, "Name:");
+			name->align(FL_ALIGN_LEFT);
+			number = new Fl_Input(120, 40, 210, 25, "Number:");
+			number->align(FL_ALIGN_LEFT);
+			money = new Fl_Input(120, 70, 210, 25, "Money:");
+			money->align(FL_ALIGN_LEFT);
+
+
+		}
+
+		void createCustomer() {
+			if (strcmp(name->value(), "") != 0 && strcmp(number->value(), "") != 0 && strcmp(money->value(), "") != 0) {
+				customers.push_back(Customer(name->value(), atoi(number->value()), atof(money->value())));
+
+				name->value("");
+				number->value("");
+				money->value("");
+				
+				window->hide();
+
+				for (int i=0; i < customers.size(); i++) {
+					cout << customers[i].getName() << ", " << customers[i].getCustomerNumber() << ", " << customers[i].getWallet() <<endl;
+				}
+
+			}
+			else {
+				cout << "Please fill in the entire form" << endl;
+			}
+		}
+
+		void show() {
+			window->show();
+		}
+		
+		void hide() {
+			window->hide();
+			name->value("");
+			number->value("");
+			money->value("");
+
+		}
+	
+	private:
+		Fl_Window *window;
+		Fl_Return_Button *create;
+		Fl_Button *cancel;
+		Fl_Input *name;
+		Fl_Input *number;
+		Fl_Input *money;
+};
+
+class CreateSalesAssociate {
+	public:
+		CreateSalesAssociate() {
+			window = new Fl_Window(340, 120, "Create Sales Associate");
+			create = new Fl_Return_Button(140, 70, 125, 25, "Create");
+			create->callback((Fl_Callback *)CreateSalesCB, 0);
+
+			cancel = new Fl_Button(270, 70, 60, 25, "Cancel");
+			cancel->callback((Fl_Callback *)CancelSalesDialogCB, 0);
+
+			name = new Fl_Input(120, 10, 210, 25, "Name:");
+			name->align(FL_ALIGN_LEFT);
+			number = new Fl_Input(120, 40, 210, 25, "Number:");
+			number->align(FL_ALIGN_LEFT);
+		}
+
+		void show() {
+			window->show();
+		}
+
+		void hide() {
+			window->hide();
+			name->value("");
+			number->value("");
+		}
+
+		void createSales() {
+			if (strcmp(name->value(), "") != 0 && strcmp(number->value(), "") != 0) {
+				sales.push_back(SalesAssociate(name->value(), atoi(number->value())));
+
+				name->value("");
+				number->value("");
+
+				window->hide();
+
+				for (int i=0; i < sales.size(); i++) {
+					cout << sales[i].getName() << ", " << sales[i].getNumber() << endl;
+				}
+			}
+		}
+
+
+	private:
+		Fl_Window *window;
+		Fl_Return_Button *create;
+		Fl_Button *cancel;
+		Fl_Input *name;
+		Fl_Input *number;
+
+};
+
+class PriceWindow {
+
+	public:
+		PriceWindow(string dollars) {
+
+			window = new Fl_Window(340, 60, "Recipe");
+			Fl_Output *price = new Fl_Output(120, 10, 210, 25, "Price:");
+			price->value(dollars.c_str());
+		}
+
+		void show() {
+			window->show();
+		}
+		
+		void hide() {
+			window->hide();
+		}
+
+	private:
+		Fl_Window *window;
+		Fl_Output *price;
+};
+
+class OrderWindow {
+
+	public:
+		OrderWindow() {
+			window = new Fl_Window(340,170, "Order Robot");
+			create = new Fl_Return_Button(140, 130, 125, 25, "Create");
+			create->callback((Fl_Callback *)OrderCB, 0);
+			cancel = new Fl_Button(270, 130, 60, 25, "Cancel");
+			cancel->callback((Fl_Callback*)CancelOrderCB, 0);
+			
+			model = new Fl_Choice(120, 10, 210, 25, "Robot:");
+			for (int i = 0; i < robots.size(); i++) {
+				model->add(robots[i].getName().c_str());
+			}
+
+			number = new Fl_Input(120, 40, 210, 25, "Order Number:");
+
+			customer = new Fl_Choice(120, 70, 210, 25, "Customer:");
+			for (int i = 0; i < customers.size(); i++) {
+				customer->add(customers[i].getName().c_str());
+			}
+
+			sale = new Fl_Choice(120, 100, 210, 25, "Sales Associate:");
+			for (int i = 0; i < sales.size(); i++) {
+				sale->add(sales[i].getName().c_str());
+			}
+
+
+		}
+
+		void show() {
+			window->show();
+		}
+
+		void hide() {
+			window->hide();
+		}
+
+		void createOrder() {
+
+				if (model->value() != -1 && customer->value() != -1 && sale->value() != -1 && strcmp(number->value(), "") != 0) {
+
+				Order created_order(&customers[customer->value()], &sales[sale->value()], atoi(number->value()));
+				created_order.addRobotModel(robots[model->value()]);
+				orders.push_back(created_order);
+				robots.erase(robots.begin() + model->value());
+				created_order.robotPrice();
+
+
+				price = new PriceWindow(to_string(created_order.totalPrice()));
+				price->show();
+			}
 		}
 
 
 
 	private:
-//		Fl_Text_Selection *text;
 		Fl_Window *window;
-		Fl_Button *button;
-		Fl_Choice *choice;
-//		Fl_Multiline_Output *multiText;
+		Fl_Return_Button *create;
+		Fl_Button *cancel;
+		Fl_Choice *model;
+		Fl_Choice *customer;
+		Fl_Choice *sale;
+		Fl_Input *number;
+		PriceWindow *price;
+
 	
 };
 
-
 // Callbacks
+void CloseCB(Fl_Widget* w, void* p) {
+	win->hide();
+}
 
-
-void PokeCB(Fl_Widget *w, void *p) {
-	cout << "Hey\n";
+void NextPictureCB(Fl_Widget *w, void *p) {
+	pictureWindow->showModel();
+	pictureWindow->hide();
 }
 
 void OrderRobotCB(Fl_Widget *w, void *p) {
+	orderWindow = new OrderWindow;
 	orderWindow->show();
+}
+
+void CustomerDialogCB(Fl_Widget *w, void *p) {
+	customerWindow->show();
+}
+
+void RobotModelPicturesCB(Fl_Widget *w, void *p) {
+	pictureWindow = new RobotModelPicture;
+	pictureWindow->show();
+}
+
+void ModelPictureCB(Fl_Widget *w, void *p) {
+	pictureWindow->showModel();
+	pictureWindow->hide();
+}
+
+void SalesDialogCB(Fl_Widget *w, void *p) {
+	salesWindow->show();
+}
+
+void ModelDialogCB(Fl_Widget *w, void *p) {
+	robotWindow = new CreateRobotModel;
+	robotWindow->show();
 }
 
 void CreateRobotCB(Fl_Widget *w, void *p) {
 	selectPart->show();
+}
+
+void CreateModelCB(Fl_Widget *w, void *p) {
+	robotWindow->CreateModel();
+	robotWindow->hide();
 }
 
 void SelectPartCB(Fl_Widget *w, void *p) {
@@ -439,14 +837,34 @@ void CreateArmCB(Fl_Widget *w, void *p) {
 	arm->createArm();
 }
 
+void CreateCustomerCB(Fl_Widget *w, void *p) {
+	customerWindow->createCustomer();
+}
+
+void CreateSalesCB(Fl_Widget *w, void *p) {
+	salesWindow->createSales();
+}
+
 void CreateBatteryCB(Fl_Widget *w, void *p) {
 	battery->createBattery();
 }
 
 void OrderCB(Fl_Widget *w, void *p) {
-	cout << "Order going in\n";
+	orderWindow->createOrder();
+	orderWindow->hide();
 }
 
+void CancelOrderCB(Fl_Widget *w, void *p) {
+	orderWindow->hide();
+}
+
+void CancelCustomerDialogCB(Fl_Widget *w, void *p) {
+	customerWindow->hide();
+}
+
+void CancelSalesDialogCB(Fl_Widget *w, void *p) {
+	salesWindow->hide();
+}
 
 void CancelHeadDialogCB(Fl_Widget *w, void *p) {
 	head->hide();
@@ -472,61 +890,38 @@ void CreatePartCB(Fl_Widget *w, void *p) {
 	selectPart->selectPart();
 }
 
-void CloseCB(Fl_Widget* w, void* p) {
-	win->hide();
+void CancelModelDialogCB(Fl_Widget *w, void *p) {
+	robotWindow->hide();
+}
+
+void CancelPictureDialogCB(Fl_Widget *w, void *p) {
+	pictureWindow->hide();
 }
 
 
 Fl_Menu_Item menuitems[] = {
 	{"&File", 0, 0, 0, FL_SUBMENU},
-		{"&New", FL_ALT + 'N', (Fl_Callback *)PokeCB},
-		{"&Open", FL_ALT + 'O', (Fl_Callback *)PokeCB},
-		{"&Save", FL_ALT + 'S', (Fl_Callback *)PokeCB},
-		{"&Save As", FL_ALT + 'H', (Fl_Callback *)PokeCB},
 		{"&Quit", FL_ALT + 'Q', (Fl_Callback *)CloseCB},
-		{0},
-	{"&Edit", 0, 0, 0, FL_SUBMENU},
-		{"&Undo", FL_ALT + 'Z', (Fl_Callback *)PokeCB},
-		{"&Cut", FL_ALT + 'X', (Fl_Callback *)PokeCB},
-		{"&Copy", FL_ALT + 'C', (Fl_Callback *)PokeCB},
-		{"&Paste", FL_ALT + 'P', (Fl_Callback *)PokeCB},
 		{0},
 	{"&Create", 0, 0, 0, FL_SUBMENU},
 		{"&Order", 0, (Fl_Callback *)OrderRobotCB, 0, FL_MENU_DIVIDER},
-		{"&Customer", 0, (Fl_Callback *)PokeCB},
-		{"&Sales Associate", 0, (Fl_Callback *)PokeCB, 0, FL_MENU_DIVIDER},
+		{"&Customer", 0, (Fl_Callback *)CustomerDialogCB},
+		{"&Sales Associate", 0, (Fl_Callback *)SalesDialogCB, 0, FL_MENU_DIVIDER},
 		{"&Robot Part", 0, (Fl_Callback *)CreateRobotCB},
-		{"&Robot Model", 0, (Fl_Callback *)PokeCB},
+		{"&Robot Model", 0, (Fl_Callback *)ModelDialogCB},
 		{0},
 	{"&Report", 0, 0, 0, FL_SUBMENU},
-		{"&Invoice", 0, (Fl_Callback *)PokeCB, 0, FL_MENU_DIVIDER},
-		{"&All Orders", 0, (Fl_Callback *)PokeCB},
-		{"&Order by Customer", 0, (Fl_Callback *)PokeCB},
-		{"&Orders by Sales Associate", 0, (Fl_Callback *)PokeCB, 0, FL_MENU_DIVIDER},
-		{"&All Customers", 0, (Fl_Callback *)PokeCB},
-		{"&All Sales Associate", 0, (Fl_Callback *)PokeCB, 0, FL_MENU_DIVIDER},
-		{"&All Robot Parts", 0, (Fl_Callback *)PokeCB},
-		{0},
-	{"&Help", 0, 0, 0, FL_SUBMENU},
-		{"&Manual", 0, (Fl_Callback *)PokeCB},
-		{"&About", 0, (Fl_Callback *)PokeCB},
+		{"&All Robot Models", 0, (Fl_Callback *)RobotModelPicturesCB},
 		{0},
 	{0}
 };
 
-
-
-
-
 int main() {
-
-	
 	vector<int> prices;
 	vector<string> names;
 
-	Customer Michael("Michael", 0117, 1000000);
-	SalesAssociate Zaman("Zaman", 1325);
-	Order order(&Michael, &Zaman, 35813);
+	customers.push_back(Customer("Michael", 0117, 1000000));
+	sales.push_back(SalesAssociate("Zaman", 1325));
 
 
 	heads.push_back(RobotHead("Doug", 1100, 25, 110, "Doug's head"));
@@ -566,72 +961,24 @@ int main() {
 	robots[1].addPart(locomotors[0]);
 	robots[1].addPart(torsos[0]);
 
-
-// GUI
-	const int X = 640; 
-	const int Y = 480;
+	// GUI
+	const int X = 330; 
+	const int Y = 270;
 
 	// Create a window
-	win = new Fl_Window{X, Y, "Robbie Robot Shop Manager"};
+	win = new Fl_Window(X, Y, "Robbie Robot Shop Manager");
 	win->color(FL_WHITE);
 
-	// Install menu bar
-	menubar = new Fl_Menu_Bar(0, 0, X, 30);
+	// Install a menu bar
+	menubar = new Fl_Menu_Bar(0,0, X, 30);
 	menubar->menu(menuitems);
 
 	view = new View(0, 0, X, Y);
-	orderWindow = new OrderWindow;
 	selectPart = new SelectPart;
+	customerWindow = new CreateCustomer;
+	salesWindow = new CreateSalesAssociate;
 
-	// Wrap it up and let FLTK do its thing
 	win->end();
 	win->show();
 	return(Fl::run());
 }
-
-// Command Line Version
-/*
-	vector<RobotModel> robots;
-	vector<RobotHead> heads;
-	vector<RobotArm> arms;
-	vector<RobotBattery> batteries;
-	vector<RobotTorso> torsos;
-	vector<RobotLocomotor> locomotors;	
-	vector<int> prices;
-	vector<string> names;
-
-	int choice;
-	bool shopOpen = true;
-
-	while (shopOpen != false)
-	{
-		cout << "\nMAIN MENU" << endl << "---------" << endl;
-		cout << "1 - Create\n";
-		cout << "2 - Report\n";
-		cout << "3 - Quit\n";
-		cout << "Your Choice: ";
-
-		cin >> choice;
-
-		switch (choice)
-		{
-		case 1:
-			cout << "Create Robot\n";
-			createMenu(heads, arms, batteries, torsos, locomotors, robots, order);
-			break;
-		case 2:
-			cout << "Report of Robot\n";
-			createReport(heads, arms, batteries, torsos, locomotors, robots, order);
-			break;
-		case 3:
-			cout << "End of Program.\n";
-			shopOpen = false;
-			break;
-			default:
-			cout << "Not a Valid Choice. \n";
-			cout << "Choose again.\n";
-			cin >> choice;
-			break;
-		}
-	}
-*/
